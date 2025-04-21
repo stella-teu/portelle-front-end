@@ -45,15 +45,8 @@ GET | /events/:eventId | View details for a specific event | eventsController.sh
 PUT | /events/:eventId | Edit an event | eventsController.edit | yes
 DELETE | /events/:eventId | Delete an event | eventsController.delete | yes
 
-## Front End Routes
-| HTTP Method | Route | Description | Controller Action | Auth Required? |
-| ----------- | ----- | ----------- | ---------- |--------------- |
-GET | / | Show landing page | pagesController.home | no
-GET | /signup | Show signup form | authController.signupForm | no
-GET | /login | Show login form | authController.loginForm | no
-GET | /logout | Log user out | authController.logout | yes
-GET | /dashboard | Main page after login- user profile | usersController.dashboard | yes
-
-
 ## Wireframes
 ![Wireframe of App](./pictures/wireframes.jpg)
+
+## Component Hiearchy
+![Hiearchy](./pictures/component_hiearchy.jpeg)
