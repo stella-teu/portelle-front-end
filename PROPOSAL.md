@@ -36,6 +36,8 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 ## Back End Routes
 | HTTP Method | Route | Description | Controller Action | Auth Required? |
 | ----------- | ----- | ----------- | ---------- |--------------- |
+POST | /signup |Handle user signup | authController.signup | no
+POST | /login | Handle user login | authController.login | no
 GET | /events | See events in a specific city | eventsController.byCity | yes
 GET | /events/new | Form to create a new event | eventsController.new | yes
 POST | /events | Create a new event | eventsController.create | yes
@@ -48,9 +50,7 @@ DELETE | /events/:eventId | Delete an event | eventsController.delete | yes
 | ----------- | ----- | ----------- | ---------- |--------------- |
 GET | / | Show landing page | pagesController.home | no
 GET | /signup | Show signup form | authController.signupForm | no
-POST | /signup |Handle user signup | authController.signup | no
 GET | /login | Show login form | authController.loginForm | no
-POST | /login | Handle user login | authController.login | no
 GET | /logout | Log user out | authController.logout | yes
 GET | /dashboard | Main page after login- user profile | usersController.dashboard | yes
 
