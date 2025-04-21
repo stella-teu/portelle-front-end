@@ -23,11 +23,11 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 - AAG, I want to be restricted from creating or modifying events so that only authenticated users can manage event data.
 
 ## Stretch-goals
-The list of attendees will be shown on the event post and the event post will be visible under the user’s profile to other users. Other users cannot edit this person’s profile.
-Event creation and editing forms are pre-filled for convenience.
-Adding more cities and regions.
-Map with all the events, and redirect you to Google Maps or Apple Maps.
-Have a reminder and confirmation 24h before the event.
+- The list of attendees will be shown on the event post and the event post will be visible under the user’s profile to other users. Other users cannot edit this person’s profile.
+- Event creation and editing forms are pre-filled for convenience.
+- Adding more cities and regions.
+- Map with all the events, and redirect you to Google Maps or Apple Maps.
+- Have a reminder and confirmation 24h before the event.
 
 ## Wireframes
 ![Wireframe of App](./pictures/WIREFRAME.jpg)
