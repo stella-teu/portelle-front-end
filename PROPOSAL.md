@@ -49,4 +49,4 @@ DELETE | /events/:eventId | Delete an event | eventsController.delete | yes
 ![Wireframe of App](./pictures/wireframes.jpg)
 
 ## Component Hiearchy
-![Hiearchy](./pictures/component.jpeg)
+![Hiearchy](./pictures/components.jpeg)
