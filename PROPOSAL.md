@@ -22,7 +22,7 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 - AAG, I want to view events without logging in so that I can browse the app before signing up.
 - AAG, I want to be restricted from creating or modifying events so that only authenticated users can manage event data.
 
-## Features (Back end)
+## Features
 - JWT authentication with bcrypt password hashing and token-based session management.
 - Full CRUD functionality on `Event` model tied to `User` via ObjectId.
 - MongoDB/Mongoose used to manage user-event relationships.
@@ -42,7 +42,7 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 - Map with all the events, and redirect you to Google Maps or Apple Maps.
 - Have a reminder and confirmation 24h before the event.
 
-
+## Routes
 | HTTP Method | Route | Description | Controller Action | Auth Required? |
 | ----------- | ----- | ----------- | ---------- |--------------- |
 GET | / | Show landing page | pagesController.home | no
