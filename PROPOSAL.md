@@ -1,26 +1,17 @@
-# Portell: Events for Tourists
+# Portelle: Events for Tourists
 Portello, our travel app for individuals that want to explore a new city. The app will display different events hosted for tourists.
-
-## Goals
-- Provide users with a secure way to register and log in using JWT authentication.
-- Ensure users have access to a personalized dashboard tied to their unique account.
-- Enable users to manage their own events (create, view, edit, delete).
-- Allow users to view public events created by others, while restricting modification access.
-- Design a responsive and accessible UI with protected navigation.
-- Deploy the application online for real-world accessibility.
-- Allow users to see other users’ profiles, while restricting modification access.
-- Allow a user to see what events they’re interested in and want to take part in.
 
 ## MVP User Stories
 - AAU, I want to sign up so that I can access my personalized dashboard.
-- AAU, I want to log in so that I can manage my own events.
+- AAU, I want to log in so that I can manage my own events and events that I'm interested in.
 - AAU, I want to create a new event so that I can organize a future activity.
 - AAU, I want to view all public events so that I can discover activities shared by others.
+- AAU, I want to see specific details such as date, location and description of events when selecting them.
 - AAU, I want to edit my own events so that I can update details if plans change.
 - AAU, I want to delete my own events so that I can remove them if they're canceled.
 - AAU, I want to see “Edit” and “Delete” buttons only on events I created so that I don’t accidentally modify someone else’s.
-- AAG, I want to view events without logging in so that I can browse the app before signing up.
-- AAG, I want to be restricted from creating or modifying events so that only authenticated users can manage event data.
+- AAU, I want to see an "Attend" button on someone else's event post to show interest.
+- AAU, I want to view other users' profiles without changing anything.
 
 ## Features
 - JWT authentication with bcrypt password hashing and token-based session management.
@@ -32,7 +23,7 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 - Responsive layout using CSS Flexbox/Grid.
 
 ## ERD
-![ERD](./pictures/PortelleERD.jpg)
+![ERD](./pictures/erd.png)
 
 
 ## Stretch-goals
@@ -42,7 +33,17 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 - Map with all the events, and redirect you to Google Maps or Apple Maps.
 - Have a reminder and confirmation 24h before the event.
 
-## Routes
+## Back End Routes
+| HTTP Method | Route | Description | Controller Action | Auth Required? |
+| ----------- | ----- | ----------- | ---------- |--------------- |
+GET | /events | See events in a specific city | eventsController.byCity | yes
+GET | /events/new | Form to create a new event | eventsController.new | yes
+POST | /events | Create a new event | eventsController.create | yes
+GET | /events/:eventId | View details for a specific event | eventsController.show | yes
+PUT | /events/:eventId | Edit an event | eventsController.edit | yes
+DELETE | /events/:eventId | Delete an event | eventsController.delete | yes
+
+## Front End Routes
 | HTTP Method | Route | Description | Controller Action | Auth Required? |
 | ----------- | ----- | ----------- | ---------- |--------------- |
 GET | / | Show landing page | pagesController.home | no
@@ -52,11 +53,7 @@ GET | /login | Show login form | authController.loginForm | no
 POST | /login | Handle user login | authController.login | no
 GET | /logout | Log user out | authController.logout | yes
 GET | /dashboard | Main page after login- user profile | usersController.dashboard | yes
-GET | /explore | See events or meetups in all locations | eventsController.index | yes
-GET | /explore/:city | See events in a specific city | eventsController.byCity | yes
-GET | /events/new | Form to create a new event | eventsController.new | yes
-POST | /events | Create a new event | eventsController.create | yes
-GET | /events/:id | View details for a specific event | eventsController.show | yes
+
 
 ## Wireframes
-![Wireframe of App](./pictures/WIREFRAME.jpg)
+![Wireframe of App](./pictures/wireframes.jpg)
