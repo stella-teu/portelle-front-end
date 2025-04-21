@@ -46,7 +46,7 @@ PUT | /events/:eventId | Edit an event | eventsController.edit | yes
 DELETE | /events/:eventId | Delete an event | eventsController.delete | yes
 
 ## Wireframes
-![Wireframe of App](./pictures/wireframes.jpg)
+![Wireframe of App](./pictures/component.jpeg)
 
 ## Component Hiearchy
 ![Hiearchy](./pictures/component_hiearchy.jpeg)
