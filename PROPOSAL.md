@@ -22,12 +22,46 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 - AAG, I want to view events without logging in so that I can browse the app before signing up.
 - AAG, I want to be restricted from creating or modifying events so that only authenticated users can manage event data.
 
+## Features (Back end)
+- JWT authentication with bcrypt password hashing and token-based session management.
+- Full CRUD functionality on `Event` model tied to `User` via ObjectId.
+- MongoDB/Mongoose used to manage user-event relationships.
+- Front-end routing via `react-router-dom` with protected/private routes.
+- Conditional rendering of UI buttons (Edit/Delete) based on user ownership.
+- Fetch API used for AJAX communication between React and Express.
+- Responsive layout using CSS Flexbox/Grid.
+
+## ERD
+![ERD](./pictures/PortelleERD.jpg)
+
+
 ## Stretch-goals
-The list of attendees will be shown on the event post and the event post will be visible under the user’s profile to other users. Other users cannot edit this person’s profile.
-Event creation and editing forms are pre-filled for convenience.
-Adding more cities and regions.
-Map with all the events, and redirect you to Google Maps or Apple Maps.
-Have a reminder and confirmation 24h before the event.
+- The list of attendees will be shown on the event post and the event post will be visible under the user’s profile to other users. Other users cannot edit this person’s profile.
+- Event creation and editing forms are pre-filled for convenience.
+- Adding more cities and regions.
+- Map with all the events, and redirect you to Google Maps or Apple Maps.
+- Have a reminder and confirmation 24h before the event.
+
+
+| HTTP Method | Route | Description | Controller Action | Auth Required? |
+| ----------- | ----- | ----------- | ---------- |--------------- |
+GET | / | Show landing page | pagesController.home | no
+GET | /signup | Show signup form | authController.signupForm | no
+POST | /signup |Handle user signup | authController.signup | no
+GET | /login | Show login form | authController.loginForm | no
+POST | /login | Handle user login | authController.login | no
+GET | /logout | Log user out | authController.logout | yes
+GET | /dashboard | Main page after login- user profile | usersController.dashboard | yes
+GET | /explore | See events or meetups in all locations | eventsController.index | yes
+GET | /explore/:city | See events in a specific city | eventsController.byCity | yes
+GET | /events/new | Form to create a new event | eventsController.new | yes
+POST | /events | Create a new event | eventsController.create | yes
+GET | /events/:id | View details for a specific event | eventsController.show | yes
+
+
+
+
+
 
 ## Wireframes
 ![Wireframe of App](./pictures/WIREFRAME.jpg)
