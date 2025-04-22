@@ -45,8 +45,21 @@ GET | /events/:eventId | View details for a specific event | eventsController.sh
 PUT | /events/:eventId | Edit an event | eventsController.edit | yes
 DELETE | /events/:eventId | Delete an event | eventsController.delete | yes
 
+
 ## Wireframes
 ![Wireframe of App](./pictures/wireframes.jpg)
+
+
+| Day       | Task                                             | Blockers | Notes/Thoughts                            |
+|-----------|--------------------------------------------------|----------|-------------------------------------------|
+| Monday    | Create and present proposal                      | None     | Finalize ERD, wireframes, and user flow   |
+| Tuesday | Build authentication (signup, login, logout)     | None     | Test session functionality thoroughly     |
+| Wednesday  | Create event model and basic event routes        | None     | Test event creation & explore route       |
+| Thursday    | Build dynamic city filter for `/explore/:city`   | None     | Make explore UI dropdown or search-based  |
+| Friday  | Build event detail page and finish styling       | None     | Ensure mobile responsiveness               |
+| Saturday    | Polish, fix bugs, and test full user flow        | None     | Think through user experience              |
+| Monday    | Presentation Day                                 | None     | Show project, talk challenges + vision     |
+
 
 ## Component Hiearchy
 ![Hiearchy](./pictures/components.jpeg)
