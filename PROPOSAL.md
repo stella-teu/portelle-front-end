@@ -36,6 +36,8 @@ Portello, our travel app for individuals that want to explore a new city. The ap
 ## Back End Routes
 | HTTP Method | Route | Description | Controller Action | Auth Required? |
 | ----------- | ----- | ----------- | ---------- |--------------- |
+POST | /signup |Handle user signup | authController.signup | no
+POST | /login | Handle user login | authController.login | no
 GET | /events | See events in a specific city | eventsController.byCity | yes
 GET | /events/new | Form to create a new event | eventsController.new | yes
 POST | /events | Create a new event | eventsController.create | yes
@@ -43,17 +45,21 @@ GET | /events/:eventId | View details for a specific event | eventsController.sh
 PUT | /events/:eventId | Edit an event | eventsController.edit | yes
 DELETE | /events/:eventId | Delete an event | eventsController.delete | yes
 
-## Front End Routes
-| HTTP Method | Route | Description | Controller Action | Auth Required? |
-| ----------- | ----- | ----------- | ---------- |--------------- |
-GET | / | Show landing page | pagesController.home | no
-GET | /signup | Show signup form | authController.signupForm | no
-POST | /signup |Handle user signup | authController.signup | no
-GET | /login | Show login form | authController.loginForm | no
-POST | /login | Handle user login | authController.login | no
-GET | /logout | Log user out | authController.logout | yes
-GET | /dashboard | Main page after login- user profile | usersController.dashboard | yes
-
 
 ## Wireframes
 ![Wireframe of App](./pictures/wireframes.jpg)
+
+
+| Day       | Task                                             | Blockers | Notes/Thoughts                            |
+|-----------|--------------------------------------------------|----------|-------------------------------------------|
+| Monday    | Create and present proposal                      | None     | Finalize ERD, wireframes, and user flow   |
+| Tuesday | Build authentication (signup, login, logout)     | None     | Test session functionality thoroughly     |
+| Wednesday  | Create event model and basic event routes        | None     | Test event creation & explore route       |
+| Thursday    | Build dynamic city filter for `/explore/:city`   | None     | Make explore UI dropdown or search-based  |
+| Friday  | Build event detail page and finish styling       | None     | Ensure mobile responsiveness               |
+| Saturday    | Polish, fix bugs, and test full user flow        | None     | Think through user experience              |
+| Monday    | Presentation Day                                 | None     | Show project, talk challenges + vision     |
+
+
+## Component Hiearchy
+![Hiearchy](./pictures/components.jpeg)
