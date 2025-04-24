@@ -1,21 +1,38 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext'; 
+import React, { useContext } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider, AuthContext } from './context/AuthContext'; 
 import Navbar from './components/Navbar'; 
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
+import EventPage from './pages/Events/EventPage';  
+
+function PrivateRoute({ children }) {
+  const { isAuthenticated } = useContext(AuthContext); 
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />; 
+  }
+  return children; 
+}
 
 function App() {
   return (
     <AuthProvider>  
-      <Navbar /> {}
+      <Navbar /> 
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route 
+          path="/dashboard" 
+          element={
+            <PrivateRoute>
+              <DashboardPage />
+            </PrivateRoute>
+          } 
+        />
+        <Route path="/explore" element={<EventPage />} />  {/* Add the Explore Page Route */}
       </Routes>
     </AuthProvider>
   );
