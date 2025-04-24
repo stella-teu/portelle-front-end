@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap");
+
+
+body {
+    margin:0;
+}
+
+nav {
+    background-color: #ffffff;
+    padding: 5px;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 25px;
+    font-family: "Archivo";
+}
+
+li {
+    display: flex;
+    margin: 0 10px;
+}
+
+.auth {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+a {
+    color: black;
+    font-style: normal;
+    text-decoration: none;
+}

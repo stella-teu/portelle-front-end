@@ -1,6 +1,7 @@
+import styles from "./LandingPage.module.css";
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom"; // Import Navigate to redirect users
-import { AuthContext } from "../context/AuthContext"; // Import AuthContext
+import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
 
 export default function LandingPage() {
   const { isAuthenticated } = useContext(AuthContext); 
@@ -11,10 +12,10 @@ export default function LandingPage() {
   }
 
   return (
-    <div>
+    <div className={styles.landing}>
       <h1>Welcome to Portelle!</h1>
       <p>Explore the best events around the world.</p>
       <p>Log in or sign up to get started!</p>
-    </div>
+</div>
   );
 }
