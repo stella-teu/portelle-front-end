@@ -8,9 +8,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const navigate = useNavigate();  // Initialize useNavigate
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 try {
