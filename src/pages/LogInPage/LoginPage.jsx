@@ -1,16 +1,26 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "./LoginPage.module.css"; // Import CSS module
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";  // Import useNavigate
+import { AuthContext } from "../../context/AuthContext";
+import { loginUser } from "../services/service";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();  // Initialize useNavigate
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("jwtToken", "mocked-jwt-token");
-    navigate("/dashboard");
+try {
+  const data = await loginUser(username, password);
+  login(data.token);
+  navigate("/dashboard");
+} catch (error){
+  console.log('Login failed', error);
+  alert('Login failed! Please try again.');
+}
   };
 
   return (
@@ -22,13 +32,13 @@ export default function LoginPage() {
           type="text"
           placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)} 
+          onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)} 
+          onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Log In</button>
       </form>

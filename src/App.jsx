@@ -11,6 +11,9 @@ import SignupPage from './pages/SignupPage/SignupPage.jsx';
 import DashboardPage from './pages/DashboardPage';
 import EventPage from './pages/Events/EventPage';  
 
+// Log the EventPage import to verify it's being correctly resolved
+console.log("EventPage imported:", EventPage);
+
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useContext(AuthContext); 
   if (!isAuthenticated) {
@@ -25,8 +28,8 @@ function App() {
       <Navbar /> 
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/users/sign-in" element={<LoginPage />} />
+        <Route path="/users/sign-up" element={<SignupPage />} />
         <Route 
           path="/dashboard" 
           element={
@@ -35,7 +38,7 @@ function App() {
             </PrivateRoute>
           } 
         />
-        <Route path="/explore" element={<EventPage />} />  {/* Add the Explore Page Route */}
+        <Route path="/explore" element={<EventPage />} />
       </Routes>
     </AuthProvider>
   );

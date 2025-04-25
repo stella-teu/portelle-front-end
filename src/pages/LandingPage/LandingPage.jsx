@@ -6,9 +6,8 @@ import { AuthContext } from "../../context/AuthContext"; // Import AuthContext
 export default function LandingPage() {
   const { isAuthenticated } = useContext(AuthContext); 
 
-
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/dashboard" />; 
   }
 
   return (
