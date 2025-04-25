@@ -1,7 +1,7 @@
 import styles from "./SignupPage.module.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUpUser } from "../services/service";  // Import the signup API call
+import { signUpUser } from "../../services/service.jsx";  // Import the signup API call
 
 export default function SignupPage() {
   const [username, setUsername] = useState("");
