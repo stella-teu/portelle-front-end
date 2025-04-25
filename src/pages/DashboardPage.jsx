@@ -48,6 +48,13 @@ export default function DashboardPage() {
   return (
     <div>
       <h1>Your Dashboard</h1>
+      {/* :white_check_mark: Create Event Button */}
+      <button onClick={() => navigate("/create-events")}>
+        Create New Event
+      </button>
+      
+    <div>
+      <h1>Your Dashboard</h1>
       <h2>Your Events</h2>
       <div>
         {userEvents.map((event) => (
