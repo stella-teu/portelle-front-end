@@ -14,8 +14,8 @@ export default function Navbar() {
         {/* Conditional rendering based on authentication status */}
         {!isAuthenticated ? (  
           < section className={styles.auth}>
-            <li><Link to="/login">Log In</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
+            <li><Link to="/log-in">Log In</Link></li>
+            <li><Link to="/sign-up">Sign Up</Link></li>
           </section >
         ) : (  
           <>
