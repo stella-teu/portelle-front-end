@@ -6,7 +6,7 @@ import { AuthProvider, AuthContext } from './context/AuthContext';
 import Navbar from './components/Navbar/Navbar.jsx'; 
 import LandingPage from './pages/LandingPage/LandingPage.jsx';
 import LoginPage from './pages/LogInPage/LoginPage.jsx';
-import SignupPage from './pages/SignUpPage/SignupPage.jsx';
+import SignupPage from './pages/SignupPage/SignupPage.jsx';
 
 import DashboardPage from './pages/DashboardPage';
 import EventPage from './pages/Events/EventPage';  
