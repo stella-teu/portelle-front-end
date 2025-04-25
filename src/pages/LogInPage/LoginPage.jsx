@@ -1,14 +1,14 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";  // Import useNavigate
 import { AuthContext } from "../../context/AuthContext";
-import { loginUser } from "../services/service";
+import { loginUser } from "../../services/service.jsx";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 try {
