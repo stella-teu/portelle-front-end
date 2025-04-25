@@ -1,4 +1,4 @@
-const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/events`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`; // ✅ Fixed here!
 
 const create = async (formData) => {
   try {
@@ -8,8 +8,7 @@ const create = async (formData) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, //  Send JWT for auth
-
+        Authorization: `Bearer ${token}`, // 🔒 Send JWT for auth
       },
       body: JSON.stringify(formData),
     });
@@ -22,9 +21,4 @@ const create = async (formData) => {
   }
 };
 
-
-
-
 export { create };
-
-

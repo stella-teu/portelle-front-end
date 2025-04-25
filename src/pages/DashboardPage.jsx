@@ -43,22 +43,14 @@ export default function DashboardPage() {
   return (
     <div>
       <h1>Your Dashboard</h1>
-<<<<<<< HEAD
-      {/* :white_check_mark: Create Event Button */}
-      <button onClick={() => navigate("/create-events")}>
-        Create New Event
-      </button>
-      
-    <div>
-      <h1>Your Dashboard</h1>
-=======
+
 
       {/* ✅ Create Event Button */}
       <button onClick={() => navigate("/create-events")}>
         Create New Event
       </button>
 
->>>>>>> 6b542c50e3590ae0e2b3696d1d183d7b96f36d35
+
       <h2>Your Events</h2>
       <div>
         {userEvents.length > 0 ? (

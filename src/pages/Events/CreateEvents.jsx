@@ -9,7 +9,6 @@ const CreateEvent = () => {
     title: "",
     description: "",
     date: "",
-    location: "",
     city: ""
   });
 
@@ -56,24 +55,19 @@ const CreateEvent = () => {
           required
           className="border p-2"
         />
-        <input
-          type="text"
-          name="location"
-          placeholder="Location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-          className="border p-2"
-        />
-        <input
-          type="text"
+        <label htmlFor="city">Select your destination city:</label>
+        <select
+          id="city"
           name="city"
-          placeholder="City"
           value={formData.city}
           onChange={handleChange}
-          required
           className="border p-2"
-        />
+          required
+        >
+          <option value="">Select a city</option>
+          <option value="new-york">New York</option>
+          <option value="paris">Paris</option>
+        </select>
         <button
           type="submit"
           className="bg-green-600 text-white p-2 rounded hover:bg-green-700"
