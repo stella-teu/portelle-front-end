@@ -1,7 +1,7 @@
 import styles from "./SignupPage.module.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signUpUser } from "../../services/service.jsx";  // Import the signup API call
+import { signUpUser } from "../../services/service.jsx";  
 
 export default function SignupPage() {
   const [username, setUsername] = useState("");
@@ -14,14 +14,12 @@ export default function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate password match
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
-    // Validate city selection
-    console.log("Selected city:", city);  // Debugging log
+    console.log("Selected city:", city); 
     
     if (city !== "new-york" && city !== "paris") {
       alert("Please select a valid city: New York or Paris!");
@@ -29,14 +27,11 @@ export default function SignupPage() {
     }
 
     try {
-      // 🚀 Actually call the backend here:
       const data = await signUpUser(username, password, city);
 
-      // ✅ Save the real token from your backend (not a mock token anymore)
       localStorage.setItem("jwtToken", data.token);
 
-      // 🎉 Success! Navigate to /users/sign-in after successful signup
-      navigate("/users/sign-in");  
+      navigate("/log-in");  
     } catch (error) {
       console.error("Signup failed:", error);
       alert("Signup failed! Please try again.");
