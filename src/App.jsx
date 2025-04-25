@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext'; 
 import Navbar from './components/Navbar/Navbar'; 
 import LandingPage from './pages/LandingPage/LandingPage';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/LogInPage/LoginPage.jsx';
 import SignupPage from './pages/SignupPage';
 import DashboardPage from './pages/DashboardPage';
 import EventPage from './pages/Events/EventPage';  
