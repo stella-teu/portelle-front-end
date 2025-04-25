@@ -1,34 +1,32 @@
 import React, { createContext, useState, useEffect } from 'react';
 
-// Create a Context to hold the authentication state
 export const AuthContext = createContext();
 
-// Create the Provider component
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const storedToken = localStorage.getItem('jwtToken');  // Get token from localStorage
+  const [isAuthenticated, setIsAuthenticated] = useState(storedToken ? true : false);  // Initialize based on token
+  const [token, setToken] = useState(storedToken);
 
-  // Check for a JWT token in localStorage
   useEffect(() => {
-    const token = localStorage.getItem('jwtToken');
-    if (token) {
+    if (storedToken) {
       setIsAuthenticated(true);
     }
-  }, []);
+  }, [storedToken]);
 
-  // Function to log in the user
-  const login = (token) => {
-    localStorage.setItem('jwtToken', token);
+  const login = (newToken) => {
+    localStorage.setItem('jwtToken', newToken);  // Store token in localStorage
+    setToken(newToken);
     setIsAuthenticated(true);
   };
 
-  // Function to log out the user
   const logout = () => {
     localStorage.removeItem('jwtToken');
+    setToken(null);
     setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, token, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
