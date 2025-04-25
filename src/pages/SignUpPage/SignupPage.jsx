@@ -1,3 +1,4 @@
+import styles from "./SignUpPage.module.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";  // Import useNavigate
 
@@ -32,7 +33,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div>
+    <div className={styles.signUp}>
       <h1>Sign Up</h1>
       <p>Your Journey Begins Here.</p>
 

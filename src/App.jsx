@@ -2,10 +2,10 @@ import "./App.css";
 import React, { useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './context/AuthContext'; 
-import Navbar from './components/Navbar/Navbar'; 
-import LandingPage from './pages/LandingPage/LandingPage';
+import Navbar from './components/Navbar/Navbar.jsx'; 
+import LandingPage from './pages/LandingPage/LandingPage.jsx';
 import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
+import SignupPage from './pages/SignupPage/SignupPage.jsx';
 import DashboardPage from './pages/DashboardPage';
 import EventPage from './pages/Events/EventPage';  
 
