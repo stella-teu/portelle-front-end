@@ -16,10 +16,8 @@ form {
     flex-direction: column;
 }
 
-input, select {
+input, select, button {
     margin: 10px;
     font-size: 20px;
-}
-
-button {
+    text-align: center;
 }
