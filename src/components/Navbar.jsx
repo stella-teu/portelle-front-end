@@ -13,8 +13,8 @@ export default function Navbar() {
         {/* Conditional rendering based on authentication status */}
         {!isAuthenticated ? (  
           <>
-            <li><Link to="/login">Log In</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
+            <li><Link to="/users/sign-in">Log In</Link></li>  {/* Updated path */}
+            <li><Link to="/users/sign-up">Sign Up</Link></li>  {/* Updated path */}
           </>
         ) : (  
           <>

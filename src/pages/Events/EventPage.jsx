@@ -1,33 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Import Link to navigate to EventDetails
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+// Logging to check the events being fetched
+console.log('EventPage loaded');
 
 export default function EventPage() {
-  // Mock event data (you can replace this with real data later)
-  const events = [
-    {
-      id: 1,
-      title: "New York City Tour",
-      date: "2025-06-01",
-      description: "A guided tour of GA in NYC.",
-    },
-    {
-      id: 2,
-      title: "Paris Sightseeing",
-      date: "2025-06-10",
-      description: "Roam Paris, and eat some snacks",
-    },
-  ];
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const response = await fetch("http://localhost:5000/api/events");
+      const data = await response.json();
+      console.log("Fetched events:", data);  // Log the events to check what data we're getting
+      setEvents(data);
+    };
+    fetchEvents();
+  }, []);
 
   return (
     <div>
       <h1>Explore Events</h1>
       <div>
         {events.map((event) => (
-          <div key={event.id}>
+          <div key={event._id}>
             <h3>{event.title}</h3>
             <p>{event.date}</p>
             <p>{event.description}</p>
-            <Link to={`/events/${event.id}`}>View Details</Link> {/* Link to event details page */}
+            <Link to={`/events/${event._id}`}>View Details</Link>
           </div>
         ))}
       </div>

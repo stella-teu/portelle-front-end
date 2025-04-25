@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom"; // Import Navigate to redirect users
-import { AuthContext } from "../context/AuthContext"; // Import AuthContext
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 export default function LandingPage() {
   const { isAuthenticated } = useContext(AuthContext); 
 
-
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/dashboard" />; 
   }
 
   return (

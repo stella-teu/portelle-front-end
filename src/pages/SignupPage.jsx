@@ -1,34 +1,45 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";  // Import useNavigate
+import { useNavigate } from "react-router-dom";
+import { signUpUser } from "../services/service";  // Import the signup API call
 
 export default function SignupPage() {
-  // Set up state for each form field
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // Add state for confirmPassword
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [city, setCity] = useState("");
 
-  const navigate = useNavigate();  // Initialize useNavigate
+  const navigate = useNavigate();
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();  // Prevent the form from refreshing the page
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    // Check if passwords match
+    // Validate password match
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
 
-    // For now, we just log the data to the console (you can later handle this with an API)
-    console.log("Signed up with:", { username, password, city });
+    // Validate city selection
+    console.log("Selected city:", city);  // Debugging log
+    
+    if (city !== "new-york" && city !== "paris") {
+      alert("Please select a valid city: New York or Paris!");
+      return;
+    }
 
-    // Simulate storing the data (mock sign-up)
-    localStorage.setItem("username", username);
-    localStorage.setItem("jwtToken", "mocked-jwt-token"); // Store a mock token
+    try {
+      // 🚀 Actually call the backend here:
+      const data = await signUpUser(username, password, city);
 
-    // Redirect to login page or dashboard after successful signup
-    navigate("/login");  // Redirect to login page (or /dashboard)
+      // ✅ Save the real token from your backend (not a mock token anymore)
+      localStorage.setItem("jwtToken", data.token);
+
+      // 🎉 Success! Navigate to /users/sign-in after successful signup
+      navigate("/users/sign-in");  
+    } catch (error) {
+      console.error("Signup failed:", error);
+      alert("Signup failed! Please try again.");
+    }
   };
 
   return (
@@ -41,19 +52,22 @@ export default function SignupPage() {
           type="text"
           placeholder="Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)} // Capture username
+          onChange={(e) => setUsername(e.target.value)}
+          required
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)} // Capture password
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <input
           type="password"
           placeholder="Confirm Password"
           value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)} // Capture confirmPassword
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
         />
 
         <label htmlFor="city">Select your destination city:</label>
@@ -61,8 +75,10 @@ export default function SignupPage() {
           id="city"
           name="city"
           value={city}
-          onChange={(e) => setCity(e.target.value)} // Capture selected city
+          onChange={(e) => setCity(e.target.value)}
+          required
         >
+          <option value="">Select a city</option>
           <option value="new-york">New York</option>
           <option value="paris">Paris</option>
         </select>
@@ -72,6 +88,3 @@ export default function SignupPage() {
     </div>
   );
 }
-
-
-
