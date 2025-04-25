@@ -1,4 +1,4 @@
-import styles from "./SignUpPage.module.css";
+import styles from "./SignupPage.module.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUpUser } from "../services/service";  // Import the signup API call
