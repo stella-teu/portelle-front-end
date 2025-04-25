@@ -9,7 +9,7 @@ export default function EventPage() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const response = await fetch("http://localhost:5000/api/events");
+      const response = await fetch("http://localhost:3000/api/events");
       const data = await response.json();
       console.log("Fetched events:", data);  // Log the events to check what data we're getting
       setEvents(data);
