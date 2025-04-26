@@ -1,7 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;  
 
-console.log("API URL from .env:", API_URL);  // Confirm the API URL is correct
-
 //  SIGN UP FUNCTION
 export const signUpUser = async (username, password, city) => {
   console.log("Sending to API with city:", city);  // Debugging log
@@ -61,3 +59,19 @@ export const loginUser = async (username, password) => {
   console.log(" Login success, data received:", data);
   return data;  // Should return your JWT token
 };
+
+const showUserEvents = async (token) => {
+    try {
+        const response = await fetch(`${API_URL}/api/users/user-events`, {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+            },
+          });
+        const data = await response.json();
+        return data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export { showUserEvents };
