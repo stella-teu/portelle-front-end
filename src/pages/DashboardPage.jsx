@@ -42,6 +42,7 @@ export default function DashboardPage() {
         Create New Event
       </button>
 
+
       <h2>Your Events</h2>
       <div>
         {userEvents.length > 0 ? (
