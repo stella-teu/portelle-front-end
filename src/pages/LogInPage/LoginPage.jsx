@@ -2,7 +2,7 @@ import styles from "./LogInPage.module.css"
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";  // Import useNavigate
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { loginUser } from "../../services/service.jsx";
+import { loginUser } from "../../services/userServices.jsx";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
