@@ -1,14 +1,14 @@
-const BASE_URL = `${import.meta.env.VITE_API_URL}`;
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/events`;
 
 const create = async (formData) => {
   try {
     const token = localStorage.getItem("jwtToken");
 
-    const response = await fetch(`${BASE_URL}/api/events`, {
+    const response = await fetch(BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, //  Send JWT for auth
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(formData),
     });
@@ -21,4 +21,15 @@ const create = async (formData) => {
   }
 };
 
-export { create };
+const getAllEvents = async () => {
+  try {
+    const response = await fetch(BASE_URL);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching events:", error);
+    return [];
+  }
+};
+
+export { create, getAllEvents };

@@ -7,10 +7,9 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import LandingPage from './pages/LandingPage/LandingPage.jsx';
 import LoginPage from './pages/LogInPage/LoginPage.jsx';
 import SignupPage from './pages/SignUpPage/SignupPage.jsx';
-
-import DashboardPage from './pages/DashboardPage';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 import EventPage from './pages/Events/EventPage';
-import CreateEvents from './pages/Events/CreateEvents'; // ✅ New import
+import CreateEvents from './pages/Events/CreateEvents'; //  New import
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useContext(AuthContext);

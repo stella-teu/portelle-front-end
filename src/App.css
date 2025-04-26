@@ -1,6 +1,5 @@
 body {
     background-image: url("landing-page.jpg");
-    background-size:cover;
     z-index: -1;
 }
 
