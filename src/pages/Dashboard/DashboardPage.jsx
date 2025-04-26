@@ -1,49 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getAllEvents } from '../../services/eventService'; // Import the new service
-import './Dashboard.css'; // Keep using Dashboard.css
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext.jsx";
+import { useNavigate, Link } from "react-router-dom";
+import { showUserEvents } from "../../services/eventServices.jsx";
+import "./Dashboard.css"
 
 export default function DashboardPage() {
+  const { isAuthenticated, token } = useContext(AuthContext);
+  const [userEvents, setUserEvents] = useState([]);
+  const [userInterestedEvents, setUserInterestedEvents] = useState([]);
   const navigate = useNavigate();
-  const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    async function fetchEvents() {
-      try {
-        const fetchedEvents = await getAllEvents();
-        setEvents(fetchedEvents);
-      } catch (err) {
-        console.error("Error fetching events:", err);
-      }
-    }
+    if (!isAuthenticated) {
+      navigate("/log-in");
+    } else {
+      const fetchUserEvents = async () => {
+        try {
+          const response = await showUserEvents(token);
+          console.log(response)
+          setUserEvents(response.userCreatedEvents);
+          setUserInterestedEvents(response.user.interestedEvents);
+        } catch (error) {
+          console.error("Error fetching events:", error);
+        }
+      };
 
-    fetchEvents();
-  }, []);
+      fetchUserEvents();
+    }
+  }, [isAuthenticated, token, navigate]);
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="dashboard">
-      <h1>Welcome to your Dashboard</h1>
+      <h1>Your Dashboard</h1>
 
+      <button  className="create-event-button" onClick={() => navigate("/create-events")}>
+        Create New Event
+      </button>
+
+
+      <h2>Your Events</h2>
       <div className="cards">
-        {events.length > 0 ? (
-          events.map(event => (
+        {userEvents.length > 0 ? (
+          userEvents.map((event) => (
             <div className="card" key={event._id}>
-              <h2>{event.title}</h2>
-              <p><strong>Date:</strong> {event.date}</p>
-              <p><strong>Location:</strong> {event.location}</p>
+              <h3>{event.title}</h3>
+              <p>{event.date}</p>
+              <p>{event.description}</p>
+              <Link to={`/events/${event._id}`}>View Details</Link>
             </div>
           ))
         ) : (
-          <p>No events yet! Click the button below to create one.</p>
+          <p>You haven't created any events yet.</p>
         )}
       </div>
-
-      <button 
-        className="create-event-button"
-        onClick={() => navigate('/create-events')}
-      >
-        Create New Event
-      </button>
+      <h2>Interested Events</h2>
+      <div className="cards">
+        {userInterestedEvents.length > 0 ? (
+          userInterestedEvents.map((event) => (
+            <div className="card" key={event._id}>
+              <h3>{event.title}</h3>
+              <p>{event.date}</p>
+              <Link to={`/events/${event._id}`}>View Details</Link>
+            </div>
+          ))
+        ) : (
+          <p>You haven't added any interested events yet.</p>
+        )}
+      </div>
     </div>
   );
 }

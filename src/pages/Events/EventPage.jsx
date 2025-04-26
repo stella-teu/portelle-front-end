@@ -20,11 +20,11 @@ export default function EventPage() {
   }, []);
 
   return (
-    <div>
+    <div className='dashboard'>
       <h1>Explore Events</h1>
-      <div>
+      <div className="cards">
         {events.map((event) => (
-          <div key={event._id}>
+          <div className="card" key={event._id}>
             <h3>{event.title}</h3>
             <p>{event.date}</p>
             <p>{event.description}</p>
