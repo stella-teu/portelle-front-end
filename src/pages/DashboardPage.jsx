@@ -44,10 +44,12 @@ export default function DashboardPage() {
     <div>
       <h1>Your Dashboard</h1>
 
+
       {/* ✅ Create Event Button */}
       <button onClick={() => navigate("/create-events")}>
         Create New Event
       </button>
+
 
       <h2>Your Events</h2>
       <div>
