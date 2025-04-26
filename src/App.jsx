@@ -10,7 +10,8 @@ import SignupPage from './pages/SignUpPage/SignupPage.jsx';
 
 import DashboardPage from './pages/DashboardPage';
 import EventPage from './pages/Events/EventPage';
-import CreateEvents from './pages/Events/CreateEvents'; // ✅ New import
+import EventDetail from "./pages/Events/EventDetail.jsx";
+import CreateEvents from './pages/Events/CreateEvents';
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useContext(AuthContext);
@@ -42,6 +43,14 @@ function App() {
           element={
             <PrivateRoute>
               <CreateEvents />
+            </PrivateRoute>
+          }
+        />
+                <Route
+          path="/events/:eventId"
+          element={
+            <PrivateRoute>
+              <EventDetail />
             </PrivateRoute>
           }
         />
