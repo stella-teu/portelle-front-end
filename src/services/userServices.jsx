@@ -2,7 +2,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 console.log("API URL from .env:", API_URL);  // Confirm the API URL is correct
 
-// ✅ SIGN UP FUNCTION
+//  SIGN UP FUNCTION
 export const signUpUser = async (username, password, city) => {
   console.log("Sending to API with city:", city);  // Debugging log
 
@@ -11,7 +11,7 @@ export const signUpUser = async (username, password, city) => {
     throw new Error("API_URL is not defined.");
   }
 
-  // ✅ Corrected path with /api
+  //  Corrected path with /api
   const response = await fetch(`${API_URL}/api/users/sign-up`, {
     method: "POST",
     headers: {
@@ -28,11 +28,11 @@ export const signUpUser = async (username, password, city) => {
   }
 
   const data = await response.json();
-  console.log("✅ Signup success, data received:", data);
+  console.log(" Signup success, data received:", data);
   return data;  // Should return your JWT token
 };
 
-// ✅ LOGIN FUNCTION
+//  LOGIN FUNCTION
 export const loginUser = async (username, password) => {
   console.log("Logging in with:", { username, password });  // Debugging log
 
@@ -41,7 +41,7 @@ export const loginUser = async (username, password) => {
     throw new Error("API_URL is not defined.");
   }
 
-  // ✅ Corrected path with /api
+  //  Corrected path with /api
   const response = await fetch(`${API_URL}/api/users/sign-in`, {
     method: "POST",
     headers: {
@@ -58,6 +58,6 @@ export const loginUser = async (username, password) => {
   }
 
   const data = await response.json();
-  console.log("✅ Login success, data received:", data);
+  console.log(" Login success, data received:", data);
   return data;  // Should return your JWT token
 };

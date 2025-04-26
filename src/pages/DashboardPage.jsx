@@ -3,8 +3,6 @@ import { AuthContext } from "../context/AuthContext.jsx";
 import { useNavigate, Link } from "react-router-dom";
 import { showUserEvents } from "../services/eventServices.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 export default function DashboardPage() {
   const { isAuthenticated, token } = useContext(AuthContext);
   const [userEvents, setUserEvents] = useState([]);

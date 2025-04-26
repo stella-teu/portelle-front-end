@@ -7,8 +7,7 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import LandingPage from './pages/LandingPage/LandingPage.jsx';
 import LoginPage from './pages/LogInPage/LoginPage.jsx';
 import SignupPage from './pages/SignUpPage/SignupPage.jsx';
-
-import DashboardPage from './pages/DashboardPage';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 import EventPage from './pages/Events/EventPage';
 import EventDetail from "./pages/Events/EventDetail.jsx";
 import CreateEvents from './pages/Events/CreateEvents';
