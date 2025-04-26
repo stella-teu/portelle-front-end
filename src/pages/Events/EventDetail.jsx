@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { useParams, useNavigate } from "react-router-dom";
+import { deleteEvent } from "../../services/eventService.js";
 
 const API_URL = import.meta.env.VITE_API_URL;  
 
@@ -32,6 +33,11 @@ export default function EventDetail() {
     navigate(`/events/${eventId}/edit`);  // Redirect to the Edit Event page
   };
 
+  const handleDelete = async () => {
+    navigate("/dashboard")
+    await deleteEvent(eventId, token);
+  }
+
   return (
     <div>
       <h1>{event.title}</h1>
@@ -41,7 +47,7 @@ export default function EventDetail() {
       {event.creator === currentUser._id ? (
         <div>
           <button onClick={handleEdit}>Edit</button> {/* Edit button to navigate */}
-          <button>Delete</button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
       ) : (
         <button>Attend</button>
