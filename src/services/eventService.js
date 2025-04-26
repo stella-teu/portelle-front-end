@@ -1,20 +1,20 @@
-const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}`; // ✅ Fixed here!
+const BASE_URL = `${import.meta.env.VITE_API_URL}`;
 
 const create = async (formData) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("jwtToken");
 
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(`${BASE_URL}/api/events`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // 🔒 Send JWT for auth
+        Authorization: `Bearer ${token}`, //  Send JWT for auth
       },
       body: JSON.stringify(formData),
     });
 
     const data = await response.json();
-    return data;
+    return data.event;
   } catch (error) {
     console.error("Error creating event:", error);
     return { error: error.message };

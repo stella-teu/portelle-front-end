@@ -20,6 +20,7 @@ const CreateEvent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newEvent = await create(formData);
+    console.log(newEvent)
     if (newEvent?._id) {
       navigate("/dashboard");
     } else {
