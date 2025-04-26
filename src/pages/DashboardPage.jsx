@@ -16,10 +16,9 @@ export default function DashboardPage() {
     } else {
       const fetchUserEvents = async () => {
         try {
-
           const response = await fetch(`${API_URL}/api/events`, {
             headers: {
-              "Authorization": `Bearer ${token}`,  // Send token for protected route
+              "Authorization": `Bearer ${token}`,
             },
           });
 
@@ -30,7 +29,7 @@ export default function DashboardPage() {
           const data = await response.json();
           setUserEvents(data);
         } catch (error) {
-          console.error("❌ Error fetching events:", error);
+          console.error("Error fetching events:", error);
         }
       };
 
@@ -53,16 +52,26 @@ export default function DashboardPage() {
   return (
     <div>
       <h1>Your Dashboard</h1>
+
+      {/* ✅ Create Event Button */}
+      <button onClick={() => navigate("/create-events")}>
+        Create New Event
+      </button>
+
       <h2>Your Events</h2>
       <div>
-        {userEvents.map((event) => (
-          <div key={event._id}>
-            <h3>{event.title}</h3>
-            <p>{event.date}</p>
-            <p>{event.description}</p>
-            <Link to={`/events/${event._id}`}>View Details</Link>
-          </div>
-        ))}
+        {userEvents.length > 0 ? (
+          userEvents.map((event) => (
+            <div key={event._id}>
+              <h3>{event.title}</h3>
+              <p>{event.date}</p>
+              <p>{event.description}</p>
+              <Link to={`/events/${event._id}`}>View Details</Link>
+            </div>
+          ))
+        ) : (
+          <p>You haven't created any events yet.</p>
+        )}
       </div>
       <h2>Interested Events</h2>
       <div>
