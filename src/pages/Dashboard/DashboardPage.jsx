@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import { useNavigate, Link } from "react-router-dom";
-import { showUserEvents } from "../../services/eventServices.jsx";
+import { showUserEvents } from "../../services/userServices.jsx";
 import "./Dashboard.css"
 
 export default function DashboardPage() {
