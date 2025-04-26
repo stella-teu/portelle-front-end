@@ -53,4 +53,25 @@ const getAllEvents = async () => {
   }
 };
 
-export { create, edit, getAllEvents };
+const deleteEvent = async (id, token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type":"application/json",
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete event")
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { create, edit, getAllEvents, deleteEvent };
