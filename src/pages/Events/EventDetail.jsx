@@ -1,17 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import { useParams } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;  
 
 export default function EventDetail() {
+  const { isAuthenticated, token } = useContext(AuthContext);
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
     const fetchEvent = async () => {
       const response = await fetch(`${API_URL}/api/events/${eventId}`);
       const data = await response.json();
       setEvent(data.event);
+      if (isAuthenticated) {
+        const currentUserData = JSON.parse(atob(token.split(".")[1])).payload
+        setCurrentUser(currentUserData)
+      }
     };
 
     fetchEvent();
@@ -25,6 +32,14 @@ export default function EventDetail() {
       <p>{event.description}</p>
       <p>Date: {event.date}</p>
       <p>City: {event.city}</p>
+      {event.creator === currentUser._id ? (
+        <div>
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      ) : (
+        <button>Attend</button>
+      )}
     </div>
   );
 }
