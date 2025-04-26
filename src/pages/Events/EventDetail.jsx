@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;  
 
 export default function EventDetail() {
   const { isAuthenticated, token } = useContext(AuthContext);
   const { eventId } = useParams();
+  const navigate = useNavigate(); // Add useNavigate
   const [event, setEvent] = useState(null);
   const [currentUser, setCurrentUser] = useState(null)
 
@@ -16,8 +17,8 @@ export default function EventDetail() {
       const data = await response.json();
       setEvent(data.event);
       if (isAuthenticated) {
-        const currentUserData = JSON.parse(atob(token.split(".")[1])).payload
-        setCurrentUser(currentUserData)
+        const currentUserData = JSON.parse(atob(token.split(".")[1])).payload;
+        setCurrentUser(currentUserData);
       }
     };
 
@@ -25,6 +26,11 @@ export default function EventDetail() {
   }, [eventId]);
 
   if (!event) return <div>Loading...</div>;
+
+  // Handle Edit button click
+  const handleEdit = () => {
+    navigate(`/events/${eventId}/edit`);  // Redirect to the Edit Event page
+  };
 
   return (
     <div>
@@ -34,7 +40,7 @@ export default function EventDetail() {
       <p>City: {event.city}</p>
       {event.creator === currentUser._id ? (
         <div>
-          <button>Edit</button>
+          <button onClick={handleEdit}>Edit</button> {/* Edit button to navigate */}
           <button>Delete</button>
         </div>
       ) : (

@@ -11,6 +11,7 @@ import DashboardPage from './pages/Dashboard/DashboardPage';
 import EventPage from './pages/Events/EventPage';
 import EventDetail from "./pages/Events/EventDetail.jsx";
 import CreateEvents from './pages/Events/CreateEvents';
+import EditEvent from './pages/Events/EditEvent'; 
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useContext(AuthContext);
@@ -45,11 +46,19 @@ function App() {
             </PrivateRoute>
           }
         />
-                <Route
+        <Route
           path="/events/:eventId"
           element={
             <PrivateRoute>
               <EventDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/events/:eventId/edit"
+          element={
+            <PrivateRoute>
+              <EditEvent />
             </PrivateRoute>
           }
         />

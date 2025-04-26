@@ -21,6 +21,27 @@ const create = async (formData) => {
   }
 };
 
+const edit = async (eventId, formData) => {
+  try {
+    const token = localStorage.getItem("jwtToken");
+
+    const response = await fetch(`${BASE_URL}/${eventId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+    return data; 
+  } catch (error) {
+    console.error("Error editing event:", error);
+    return { error: error.message };
+  }
+};
+
 const getAllEvents = async () => {
   try {
     const response = await fetch(BASE_URL);
@@ -32,4 +53,4 @@ const getAllEvents = async () => {
   }
 };
 
-export { create, getAllEvents };
+export { create, edit, getAllEvents };
