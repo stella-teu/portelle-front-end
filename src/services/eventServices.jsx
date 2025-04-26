@@ -1,10 +1,17 @@
-const API_URL = `${import.meta.env.VITE_API_URL}`;  
+const API_URL = import.meta.env.VITE_API_URL;  
 
-const showInterestedEvents = async () => {
+const showUserEvents = async (token) => {
     try {
-        const response = await fetch(`${API_URL}/api/`);
+        const response = await fetch(`${API_URL}/api/users/user-events`, {
+            headers: {
+              "Authorization": `Bearer ${token}`,
+            },
+          });
         const data = await response.json();
+        return data
     } catch (error) {
-
+        console.log(error)
     }
 }
+
+export { showUserEvents };
