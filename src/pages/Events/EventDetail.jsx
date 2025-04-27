@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import { useParams, useNavigate } from "react-router-dom";
 import "./EventDetail.css";
+import { deleteEvent } from "../../services/eventService.js";
 
 const API_URL = import.meta.env.VITE_API_URL;  
 
 export default function EventDetail() {
+  const { isAuthenticated, token } = useContext(AuthContext);
   const { eventId } = useParams();
+  const navigate = useNavigate(); // Add useNavigate
   const [event, setEvent] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null)
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -17,6 +22,10 @@ export default function EventDetail() {
         const response = await fetch(`${API_URL}/api/events/${eventId}`);
         const data = await response.json();
         setEvent(data.event);
+        if (isAuthenticated) {
+          const currentUserData = JSON.parse(atob(token.split(".")[1])).payload;
+          setCurrentUser(currentUserData);
+        }
       } catch (error) {
         console.error("Error fetching event:", error);
       } finally {
@@ -46,6 +55,16 @@ export default function EventDetail() {
     });
   };
 
+  // Handle Edit button click
+  const handleEdit = () => {
+    navigate(`/events/${eventId}/edit`);  // Redirect to the Edit Event page
+  };
+
+  const handleDelete = async () => {
+    navigate("/dashboard")
+    await deleteEvent(eventId, token);
+  }
+
   return (
     <div className="event-detail">
       <div className="event-header">
@@ -73,11 +92,18 @@ export default function EventDetail() {
         <p>{event.description}</p>
       </div>
 
+{event.creator === currentUser._id ? (
       <div className="event-actions">
-        <button className="btn btn-primary" onClick={() => navigate(`/events/${eventId}/edit`)}>
+  <div>
+        <button className="btn btn-primary" onClick={handleEdit}>
           <i className="fas fa-edit"></i>
           Edit Event
         </button>
+        <button onClick={handleDelete}>Delete</button>
+ </div>
+      ) : (
+        <button>Attend</button>
+              )}
         <button className="btn btn-secondary" onClick={() => navigate(-1)}>
           <i className="fas fa-arrow-left"></i>
           Back to Events

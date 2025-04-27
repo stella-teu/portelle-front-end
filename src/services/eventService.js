@@ -21,6 +21,27 @@ const create = async (formData) => {
   }
 };
 
+const edit = async (eventId, formData) => {
+  try {
+    const token = localStorage.getItem("jwtToken");
+
+    const response = await fetch(`${BASE_URL}/${eventId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+    return data; 
+  } catch (error) {
+    console.error("Error editing event:", error);
+    return { error: error.message };
+  }
+};
+
 const getAllEvents = async () => {
   try {
     const response = await fetch(BASE_URL);
@@ -32,4 +53,25 @@ const getAllEvents = async () => {
   }
 };
 
-export { create, getAllEvents };
+const deleteEvent = async (id, token) => {
+  try {
+    const response = await fetch(`${BASE_URL}/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type":"application/json",
+      }
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete event")
+    }
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export { create, edit, getAllEvents, deleteEvent };
