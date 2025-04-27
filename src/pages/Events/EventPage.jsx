@@ -12,7 +12,7 @@ export default function EventPage() {
     const fetchEvents = async () => {
       const response = await fetch(`${API_URL}/api/events`);
       const data = await response.json();
-      console.log("Fetched events:", data);  /
+      console.log("Fetched events:", data);  
       setEvents(data);
     };
     fetchEvents();
