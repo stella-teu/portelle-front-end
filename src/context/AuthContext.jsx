@@ -1,11 +1,14 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const storedToken = localStorage.getItem('jwtToken');  // Get token from localStorage
   const [isAuthenticated, setIsAuthenticated] = useState(storedToken ? true : false);  // Initialize based on token
   const [token, setToken] = useState(storedToken);
+  
 
   useEffect(() => {
     if (storedToken) {
@@ -23,6 +26,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('jwtToken');
     setToken(null);
     setIsAuthenticated(false);
+    navigate("/");
   };
 
   return (
