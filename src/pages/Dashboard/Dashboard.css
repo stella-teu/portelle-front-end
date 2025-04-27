@@ -1,45 +1,106 @@
 .dashboard {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
     max-width: 1200px;
-    margin: 4rem auto;
-    padding: 2rem;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    min-height: 100vh;
+    background-color: var(--background-color);
 }
 
 .dashboard h1 {
     font-size: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-xl);
+    color: var(--text-primary);
     text-align: center;
+    font-weight: 700;
+}
+
+.dashboard h2 {
+    font-size: 1.8rem;
+    margin: var(--spacing-xl) 0 var(--spacing-lg);
+    color: var(--text-primary);
+    font-weight: 600;
+    position: relative;
+    padding-bottom: var(--spacing-sm);
+}
+
+.dashboard h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: var(--border-radius-sm);
 }
 
 .cards {
-    display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 5rem; /* add some space above the button */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
 }
 
 .card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    padding: 2rem;
-    width: 250px;
-    text-align: center;
-    transition: transform 0.3s ease;
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
-.card h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+.card:hover::before {
+    opacity: 1;
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
 }
 
 .card p {
     color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: var(--spacing-sm);
+}
+
+.card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: auto;
+    padding: var(--spacing-sm) 0;
+    transition: color 0.2s ease;
+}
+
+.card a:hover {
+    color: var(--primary-hover);
 }
 
 .create-event-button {
@@ -48,15 +109,62 @@
     right: 30px;
     background-color: var(--primary-color);
     color: white;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: 1.1rem;
     border: none;
     border-radius: var(--border-radius-lg);
     cursor: pointer;
     box-shadow: var(--shadow-lg);
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    z-index: 100;
 }
 
 .create-event-button:hover {
     background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg), 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.create-event-button:active {
+    transform: translateY(0);
+}
+
+/* Empty state styling */
+.cards p:only-child {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    padding: var(--spacing-xl);
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: var(--spacing-lg);
+    }
+
+    .dashboard h1 {
+        font-size: 2rem;
+    }
+
+    .dashboard h2 {
+        font-size: 1.5rem;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .create-event-button {
+        bottom: 20px;
+        right: 20px;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: 1rem;
+    }
 }

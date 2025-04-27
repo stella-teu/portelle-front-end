@@ -1,54 +1,90 @@
 .container {
     max-width: 400px;
     margin: 100px auto;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: var(--spacing-xl);
+    background-color: var(--surface-color);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
     text-align: center;
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-family);
+    animation: fadeIn 0.5s ease-out;
 }
 
 h1 {
     font-size: 2.2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
 p {
-    color: #555;
-    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+    font-size: 1.1rem;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: var(--spacing-md);
 }
 
 input {
-    padding: 0.75rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-base);
+    border: 1px solid var(--secondary-color);
+    border-radius: var(--border-radius-md);
     outline: none;
-    transition: 0.3s border-color;
+    transition: all 0.2s ease;
+    background-color: var(--background-color);
 }
 
 input:focus {
-    border-color: #2563eb;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.7;
 }
 
 button {
-    padding: 0.75rem;
-    font-size: 1rem;
-    background-color: #2563eb;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-base);
+    background-color: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--border-radius-md);
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    margin-top: var(--spacing-sm);
 }
 
 button:hover {
-    background-color: #1d4ed8;
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Add a subtle hover effect to the container */
+.container:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 50px auto;
+        padding: var(--spacing-lg);
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
 }
