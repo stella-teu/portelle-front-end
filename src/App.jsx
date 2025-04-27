@@ -12,6 +12,7 @@ import EventPage from './pages/Events/EventPage';
 import EventDetail from "./pages/Events/EventDetail.jsx";
 import CreateEvents from './pages/Events/CreateEvents';
 import EditEvent from './pages/Events/EditEvent'; 
+import InterestedEvents from './pages/Events/InterestedEvents'; 
 
 function PrivateRoute({ children }) {
   const { isAuthenticated } = useContext(AuthContext);
@@ -62,6 +63,14 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+  path="/interested-events"
+  element={
+    <PrivateRoute>
+      <InterestedEvents />
+    </PrivateRoute>
+  }
+/>
       </Routes>
     </AuthProvider>
   );

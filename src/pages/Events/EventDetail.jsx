@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { deleteEvent, editInterestedEvent } from "../../services/eventService.js";
-
+import { deleteEvent } from "../../services/eventService.js";
+import { toggleInterestedEvent } from "../../services/userServices.jsx";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -28,11 +28,15 @@ export default function EventDetail() {
         const data = await response.json();
         setEvent(data.event);
 
-        if (data.event && currentUser) {
-          if (data.event.interestedUsers.includes(currentUser._id)) {
-            setIsInterested(true);
-          }
-        }
+        const userResponse = await fetch(`${API_URL}/api/users/user-events`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const userData = await userResponse.json();
+
+        const isEventInterested = userData.user.interestedEvents.some(
+          (interestedEvent) => interestedEvent._id === eventId
+        );
+        setIsInterested(isEventInterested);
       } catch (error) {
         console.error("Error fetching event:", error);
       }
@@ -41,7 +45,7 @@ export default function EventDetail() {
     if (currentUser) {
       fetchEvent();
     }
-  }, [eventId, currentUser]); 
+  }, [eventId, currentUser, token]);
 
   if (!event) return <div>Loading...</div>;
 
@@ -50,23 +54,19 @@ export default function EventDetail() {
   };
 
   const handleInterested = async () => {
-    if (isInterested) return; 
-
     try {
-      const updatedEvent = await editInterestedEvent(eventId);
+      const updatedEvent = await toggleInterestedEvent(eventId);
       if (updatedEvent) {
-        setIsInterested(true);
-      } else {
-        console.error("Failed to mark as interested.");
+        setIsInterested((prev) => !prev);
       }
     } catch (error) {
-      console.error("Error marking event as interested:", error);
+      console.error("Error toggling interested status:", error);
     }
   };
 
   const handleDelete = async () => {
     await deleteEvent(eventId, token);
-    navigate("/dashboard"); 
+    navigate("/dashboard");
   };
 
   return (
@@ -78,12 +78,12 @@ export default function EventDetail() {
       {event.creator === currentUser?._id ? (
         <div>
           <button onClick={handleEdit}>Edit</button>
-          <button onClick={handleDelete}>Delete</button> {}
+          <button onClick={handleDelete}>Delete</button>
         </div>
       ) : (
         <div>
           {isInterested ? (
-            <button disabled>Already Interested</button>
+            <button onClick={handleInterested}>Uninterested</button>
           ) : (
             <button onClick={handleInterested}>Interested</button>
           )}

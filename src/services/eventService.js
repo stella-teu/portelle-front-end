@@ -53,7 +53,6 @@ const getAllEvents = async () => {
   }
 };
 
-// ✅ Teammate's Delete Event Function
 const deleteEvent = async (id, token) => {
   try {
     const response = await fetch(`${BASE_URL}/${id}`, {
@@ -79,20 +78,22 @@ const editInterestedEvent = async (eventId) => {
   try {
     const token = localStorage.getItem("jwtToken");
 
-    const response = await fetch(`${BASE_URL}/${eventId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/users/${eventId}`, 
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Error marking event as interested:", error);
+    console.error("Error toggling interested event:", error);
     return { error: error.message };
   }
 };
-
 export { create, edit, getAllEvents, deleteEvent, editInterestedEvent };
