@@ -13,7 +13,6 @@ export default function EventDetail() {
   const [event, setEvent] = useState(null);
   const [currentUser, setCurrentUser] = useState(null)
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -92,16 +91,17 @@ export default function EventDetail() {
         <p>{event.description}</p>
       </div>
 
+
+<div className="event-actions">
 {event.creator === currentUser._id ? (
-      <div className="event-actions">
-  <div>
+  <>
         <button className="btn btn-primary" onClick={handleEdit}>
           <i className="fas fa-edit"></i>
           Edit Event
         </button>
         <button onClick={handleDelete}>Delete</button>
- </div>
-      ) : (
+ </>
+      ): (
         <button>Attend</button>
               )}
         <button className="btn btn-secondary" onClick={() => navigate(-1)}>
@@ -109,6 +109,6 @@ export default function EventDetail() {
           Back to Events
         </button>
       </div>
-    </div>
+      </div>
   );
 }
