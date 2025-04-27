@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { edit } from "../../services/eventService"; // Correct import
+import { edit } from "../../services/eventService"; 
 
 const EditEvent = () => {
   const navigate = useNavigate();
@@ -17,11 +17,10 @@ const EditEvent = () => {
       const response = await fetch(`http://localhost:3000/api/events/${eventId}`);
       const data = await response.json();
 
-      // Prefill the form with the existing event data
       setFormData({
         title: data.event.title,
         description: data.event.description,
-        date: data.event.date, // Assuming it's in yyyy-mm-dd format
+        date: data.event.date, 
         city: data.event.city,
       });
     };
@@ -40,7 +39,7 @@ const EditEvent = () => {
     const updatedEvent = await edit(eventId, formData);
 
     if (updatedEvent?._id) {
-      navigate(`/events/${eventId}`); // Redirect to event detail page after successful update
+      navigate(`/events/${eventId}`); 
     } else {
       alert("Failed to update event.");
     }

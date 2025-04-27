@@ -1,7 +1,7 @@
 import styles from "./LandingPage.module.css";
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom"; // Import Navigate to redirect users
-import { AuthContext } from "../../context/AuthContext.jsx"; // Import AuthContext
+import { Navigate } from "react-router-dom"; 
+import { AuthContext } from "../../context/AuthContext.jsx"; 
 
 export default function LandingPage() {
   const { isAuthenticated } = useContext(AuthContext); 

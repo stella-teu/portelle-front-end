@@ -35,7 +35,7 @@ const edit = async (eventId, formData) => {
     });
 
     const data = await response.json();
-    return data; 
+    return data;
   } catch (error) {
     console.error("Error editing event:", error);
     return { error: error.message };
@@ -59,19 +59,41 @@ const deleteEvent = async (id, token) => {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-type":"application/json",
-      }
+        "Content-type": "application/json",
+      },
     });
 
     if (!response.ok) {
-      throw new Error("Failed to delete event")
+      throw new Error("Failed to delete event");
     }
-    
+
     const data = await response.json();
     return data;
   } catch (error) {
     console.error(error);
   }
-}
+};
 
-export { create, edit, getAllEvents, deleteEvent };
+const editInterestedEvent = async (eventId) => {
+  try {
+    const token = localStorage.getItem("jwtToken");
+
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/users/${eventId}`, 
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error toggling interested event:", error);
+    return { error: error.message };
+  }
+};
+export { create, edit, getAllEvents, deleteEvent, editInterestedEvent };

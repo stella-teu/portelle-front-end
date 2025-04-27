@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { create } from "../../services/eventService"; // go up two levels from /pages/events
+import { create } from "../../services/eventService"; 
 
 const CreateEvent = () => {
   const navigate = useNavigate();

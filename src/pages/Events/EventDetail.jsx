@@ -1,30 +1,44 @@
 import React, { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthContext.jsx";
 import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext.jsx";
 import "./EventDetail.css";
 import { deleteEvent } from "../../services/eventService.js";
+import { toggleInterestedEvent } from "../../services/userServices.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL;  
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function EventDetail() {
   const { isAuthenticated, token } = useContext(AuthContext);
   const { eventId } = useParams();
-  const navigate = useNavigate(); // Add useNavigate
+  const navigate = useNavigate();
   const [event, setEvent] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isInterested, setIsInterested] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      const currentUserData = JSON.parse(atob(token.split(".")[1])).payload;
+      setCurrentUser(currentUserData);
+    }
+  }, [isAuthenticated, token]);
 
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        setLoading(true);
         const response = await fetch(`${API_URL}/api/events/${eventId}`);
         const data = await response.json();
         setEvent(data.event);
-        if (isAuthenticated) {
-          const currentUserData = JSON.parse(atob(token.split(".")[1])).payload;
-          setCurrentUser(currentUserData);
-        }
+
+        const userResponse = await fetch(`${API_URL}/api/users/user-events`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const userData = await userResponse.json();
+
+        const isEventInterested = userData.user.interestedEvents.some(
+          (interestedEvent) => interestedEvent._id === eventId
+        );
+        setIsInterested(isEventInterested);
       } catch (error) {
         console.error("Error fetching event:", error);
       } finally {
@@ -32,8 +46,10 @@ export default function EventDetail() {
       }
     };
 
-    fetchEvent();
-  }, [eventId]);
+    if (currentUser) {
+      fetchEvent();
+    }
+  }, [eventId, currentUser, token]);
 
   if (loading) {
     return <div className="loading">Loading event details...</div>;
@@ -54,15 +70,25 @@ export default function EventDetail() {
     });
   };
 
-  // Handle Edit button click
   const handleEdit = () => {
-    navigate(`/events/${eventId}/edit`);  // Redirect to the Edit Event page
+    navigate(`/events/${eventId}/edit`);
+  };
+
+  const handleInterested = async () => {
+    try {
+      const updatedEvent = await toggleInterestedEvent(eventId);
+      if (updatedEvent) {
+        setIsInterested((prev) => !prev);
+      }
+    } catch (error) {
+      console.error("Error toggling interested status:", error);
+    }
   };
 
   const handleDelete = async () => {
-    navigate("/dashboard")
     await deleteEvent(eventId, token);
-  }
+    navigate("/dashboard");
+  };
 
   return (
     <div className="event-detail">
@@ -91,24 +117,27 @@ export default function EventDetail() {
         <p>{event.description}</p>
       </div>
 
-
-<div className="event-actions">
-{event.creator === currentUser._id ? (
-  <>
-        <button className="btn btn-primary" onClick={handleEdit}>
-          <i className="fas fa-edit"></i>
-          Edit Event
-        </button>
-        <button onClick={handleDelete}>Delete</button>
- </>
-      ): (
-        <button>Attend</button>
-              )}
+      <div className="event-actions">
+        {event.creator === currentUser?._id ? (
+          <>
+            <button className="btn btn-primary" onClick={handleEdit}>
+              <i className="fas fa-edit"></i> Edit Event
+            </button>
+            <button onClick={handleDelete}>Delete</button>
+          </>
+        ) : (
+          <>
+            {isInterested ? (
+              <button onClick={handleInterested}>Uninterested</button>
+            ) : (
+              <button onClick={handleInterested}>Interested</button>
+            )}
+          </>
+        )}
         <button className="btn btn-secondary" onClick={() => navigate(-1)}>
-          <i className="fas fa-arrow-left"></i>
-          Back to Events
+          <i className="fas fa-arrow-left"></i> Back to Events
         </button>
       </div>
-      </div>
+    </div>
   );
 }

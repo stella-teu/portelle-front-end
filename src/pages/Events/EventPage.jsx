@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;  
 
-// Logging to check the events being fetched
 console.log('EventPage loaded');
 
 export default function EventPage() {
@@ -13,7 +12,7 @@ export default function EventPage() {
     const fetchEvents = async () => {
       const response = await fetch(`${API_URL}/api/events`);
       const data = await response.json();
-      console.log("Fetched events:", data);  // Log the events to check what data we're getting
+      console.log("Fetched events:", data);  /
       setEvents(data);
     };
     fetchEvents();
