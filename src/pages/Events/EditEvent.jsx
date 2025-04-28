@@ -40,9 +40,7 @@ const EditEvent = () => {
 
     if (updatedEvent?._id) {
       navigate(`/events/${eventId}`); 
-    } else {
-      alert("Failed to update event.");
-    }
+    } 
   };
 
   return (

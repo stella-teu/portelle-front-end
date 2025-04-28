@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext.jsx";
 import "./EventDetail.css";
 import { deleteEvent } from "../../services/eventService.js";
@@ -60,13 +60,13 @@ export default function EventDetail() {
   }
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -134,9 +134,12 @@ export default function EventDetail() {
             )}
           </>
         )}
-        <button className="btn btn-secondary" onClick={() => navigate("/explore")}>
-  <i className="fas fa-arrow-left"></i> Back to Events
-</button>
+          <button
+            className="btn btn-secondary"
+            onClick={() => navigate("/explore")}
+          >
+            <i className="fas fa-arrow-left"></i> Back to Events
+          </button>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.css";
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext.jsx'; // Import AuthContext
+import { AuthContext } from '../../context/AuthContext.jsx'; 
 
 export default function Navbar() {
   const { isAuthenticated, logout } = useContext(AuthContext);  
@@ -11,7 +11,7 @@ export default function Navbar() {
       <ul>
         <li><Link to="/">Home</Link></li>
         
-        {/* Conditional rendering based on authentication status */}
+        {}
         {!isAuthenticated ? (  
           < section className={styles.auth}>
             <li><Link to="/log-in">Log In</Link></li>

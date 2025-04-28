@@ -5,8 +5,8 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const storedToken = localStorage.getItem('jwtToken');  // Get token from localStorage
-  const [isAuthenticated, setIsAuthenticated] = useState(storedToken ? true : false);  // Initialize based on token
+  const storedToken = localStorage.getItem('jwtToken');  
+  const [isAuthenticated, setIsAuthenticated] = useState(storedToken ? true : false);  
   const [token, setToken] = useState(storedToken);
   
 
@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   }, [storedToken]);
 
   const login = (newToken) => {
-    localStorage.setItem('jwtToken', newToken);  // Store token in localStorage
+    localStorage.setItem('jwtToken', newToken);  
     setToken(newToken);
     setIsAuthenticated(true);
   };
