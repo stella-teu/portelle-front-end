@@ -1,6 +1,6 @@
 # **Portelle – Full-Stack Web App for Tourist Events**
 
-![App Screenshot](./pictures/wireframes.jpg)
+![App Screenshot](./pictures/readmephoto.jpg)
 
 ---
 
