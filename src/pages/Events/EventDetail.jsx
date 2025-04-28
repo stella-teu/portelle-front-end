@@ -134,9 +134,9 @@ export default function EventDetail() {
             )}
           </>
         )}
-        <button className="btn btn-secondary" onClick={() => navigate(-1)}>
-          <i className="fas fa-arrow-left"></i> Back to Events
-        </button>
+        <button className="btn btn-secondary" onClick={() => navigate("/explore")}>
+  <i className="fas fa-arrow-left"></i> Back to Events
+</button>
       </div>
     </div>
   );
