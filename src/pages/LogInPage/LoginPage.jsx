@@ -18,7 +18,6 @@ try {
   navigate("/dashboard");
 } catch (error){
   console.log('Login failed', error);
-  alert('Login failed! Please try again.');
 }
   };
 

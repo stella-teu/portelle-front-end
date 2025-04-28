@@ -15,14 +15,12 @@ export default function SignupPage() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
       return;
     }
 
     console.log("Selected city:", city); 
     
     if (city !== "new-york" && city !== "paris") {
-      alert("Please select a valid city: New York or Paris!");
       return;
     }
 
@@ -34,7 +32,6 @@ export default function SignupPage() {
       navigate("/log-in");  
     } catch (error) {
       console.error("Signup failed:", error);
-      alert("Signup failed! Please try again.");
     }
   };
 
